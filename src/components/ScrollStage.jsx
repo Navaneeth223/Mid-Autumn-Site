@@ -44,7 +44,7 @@ export default function ScrollStage({ assets, active }) {
   const crossRef = useRef(null)
 
   const sceneRef = useRef(null)
-  const stRef = useRef({ frame: 0, fade: 0, dx: 0, dy: 0, rotY: 0 })
+  const stRef = useRef({ frame: 0, fade: 0, dx: 0, dy: 0, rotY: 0, zoom: 0 })
   const lastDrawn = useRef(-1)
   const flags = useRef({ rabbit: false, moonHint: false, pressHint: false })
   const stageActive = useRef(false)
@@ -170,7 +170,13 @@ export default function ScrollStage({ assets, active }) {
         dx: st.dx,
         dy: st.dy,
         rotY: st.rotY,
-        scale: 0.94 + 0.06 * st.fade,
+        // st.zoom = drift-only swell: keeps the pop-out pixel-exact (0.94 -> 1.0
+        // vs the baked cake), then lets the 3D cake read hero-sized on wide
+        // viewports, where the cover-crop barely overflows (portrait phones
+        // already overflow ~3.8x, so they get no boost).
+        scale:
+          (0.94 + 0.06 * st.fade) *
+          (1 + st.zoom * (viewSize.current.w > viewSize.current.h ? 0.1 : 0)),
       })
       sceneRef.current.setActive(stageActive.current && st.fade > 0.01)
     }
@@ -404,6 +410,7 @@ export default function ScrollStage({ assets, active }) {
     tl.to(st, { fade: 1, duration: TL.popEnd - TL.scrubEnd, onUpdate: apply }, TL.scrubEnd)
 
     // 4) drift: soft zigzag + slow turn (wiggle/bob/auto-rotate live in RAF)
+    tl.to(st, { zoom: 1, duration: 0.14, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd)
     tl.to(st, { dx: 0.11, dy: -0.07, rotY: 0.5, duration: 0.1, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd)
     tl.to(st, { dx: -0.11, dy: 0.06, rotY: -0.4, duration: 0.12, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd + 0.1)
     tl.to(st, { dx: 0.08, dy: -0.05, rotY: 0.25, duration: 0.1, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd + 0.22)
