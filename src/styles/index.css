@@ -113,7 +113,7 @@ body.scroll-locked {
   70% { transform: rotate(4deg); }
 }
 .rabbit-pestle {
-  transform-origin: 126px 106px; /* top grip point of the pestle, in the SVG's own coords */
+  transform-origin: 146px 134px; /* shoulder grip point of the pestle, in the SVG's own coords */
   animation: pestle-pound 2.8s ease-in-out infinite;
 }
 
@@ -151,6 +151,17 @@ body.scroll-locked {
 }
 .seal-breath { animation: seal-breath 3.2s ease-in-out infinite; }
 
+/* Loader vignette — the jade rabbit's silhouette pestle gently pounds. */
+@keyframes loader-pound {
+  0%, 55%, 100% { transform: rotate(0deg); }
+  62% { transform: rotate(-10deg); }
+  70% { transform: rotate(3deg); }
+}
+.loader-pestle {
+  transform-origin: 110px 120px; /* grip point, in the loader SVG's own coords */
+  animation: loader-pound 1.7s ease-in-out infinite;
+}
+
 /* ------------------------------------------------- reduced-motion policy */
 /* Keeps ALL content, drops loops/pulses; the scrub is disabled in JS and the
    stage renders a static poster instead. */
@@ -163,7 +174,8 @@ body.scroll-locked {
   .yolk-glow,
   .loader-star,
   .loader-dust,
-  .seal-breath {
+  .seal-breath,
+  .loader-pestle {
     animation: none !important;
   }
 }

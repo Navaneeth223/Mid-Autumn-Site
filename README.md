@@ -7,10 +7,10 @@ Festival gift from **Navi** to **Ames**.
 ## The journey
 
 1. **Loader** — a quiet night sky (twinkling stars, drifting gold dust) with a
-   thin golden arc that fills smoothly around a breathing osmanthus seal
-   carrying 月. Progress is lerped in a rAF loop and written straight to the
-   DOM, so nothing pops even when assets arrive unevenly. Scroll is locked
-   until everything is ready.
+   thin golden arc that fills smoothly around a breathing vignette: the jade
+   rabbit pounding the elixir beneath a full moon. Progress is lerped in a rAF
+   loop and written straight to the DOM, so nothing pops even when assets
+   arrive unevenly. Scroll is locked until everything is ready.
 2. **Hero** — bilingual greeting addressed to Ames, glowing moon, swaying
    paper lantern, twinkling stars, "scroll to begin".
 3. **The formation (pinned scroll scrub)** — 121 video frames drawn 1:1 onto

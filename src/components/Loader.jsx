@@ -10,7 +10,8 @@ import { useReducedMotion } from '../hooks/useReducedMotion.js'
 //
 // New design: a quiet night sky (theme tokens) with a few twinkling stars and
 // drifting gold dust, and at the center a thin golden arc that fills smoothly
-// around a gently-breathing osmanthus seal carrying 月 — the moon. Progress is
+// around a hand-drawn vignette — the jade rabbit pounding the elixir beneath a
+// full moon (pure SVG art; no emoji or character glyphs). Progress is
 // LERPed in a rAF loop and written straight to the DOM (no React re-renders),
 // so the arc, the tip dot and the percentage never pop no matter how unevenly
 // assets arrive. Scroll stays locked (body.scroll-locked) until `done`, then
@@ -19,11 +20,25 @@ import { useReducedMotion } from '../hooks/useReducedMotion.js'
 
 const R = 88
 const CIRC = 2 * Math.PI * R
-const PETALS = [0, 45, 90, 135, 180, 225, 270, 315]
 const STARS = [
   [12, 18], [26, 64], [38, 12], [57, 78], [66, 24],
   [74, 56], [85, 16], [91, 70], [18, 84], [47, 92],
 ]
+
+// A tiny 4-petal osmanthus blossom (sprig decoration around the moon).
+const Blossom = ({ x, y, r = 2 }) => (
+  <g fill="#F0C767">
+    {[0, 90, 180, 270].map((a) => (
+      <circle
+        key={a}
+        cx={x + r * Math.cos((a * Math.PI) / 180)}
+        cy={y + r * Math.sin((a * Math.PI) / 180)}
+        r={r * 0.72}
+      />
+    ))}
+    <circle cx={x} cy={y} r={r * 0.55} fill="#C89B4B" />
+  </g>
+)
 
 export default function Loader({ progress, done, onGone }) {
   const ref = useRef(null)
@@ -136,7 +151,7 @@ export default function Loader({ progress, done, onGone }) {
         ))}
       </div>
 
-      {/* the golden arc + breathing osmanthus seal */}
+      {/* the golden arc + breathing moon vignette (jade rabbit seal) */}
       <div data-seal className="relative" style={{ willChange: 'transform' }}>
         <svg width="220" height="220" viewBox="0 0 220 220" aria-hidden="true">
           <defs>
@@ -145,10 +160,15 @@ export default function Loader({ progress, done, onGone }) {
               <stop offset="55%" stopColor="#F0C767" />
               <stop offset="100%" stopColor="#C89B4B" />
             </linearGradient>
-            <radialGradient id="sealFace" cx="42%" cy="36%" r="80%">
-              <stop offset="0%" stopColor="#FFF3D0" stopOpacity="0.9" />
-              <stop offset="70%" stopColor="#F0C767" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#F0C767" stopOpacity="0.1" />
+            <radialGradient id="moonHalo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#F7D98F" stopOpacity="0.5" />
+              <stop offset="55%" stopColor="#F0C767" stopOpacity="0.16" />
+              <stop offset="100%" stopColor="#F0C767" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="moonBody" cx="38%" cy="30%" r="80%">
+              <stop offset="0%" stopColor="#FFFBEC" />
+              <stop offset="55%" stopColor="#F9E7BC" />
+              <stop offset="100%" stopColor="#EFD08A" />
             </radialGradient>
           </defs>
           {/* track */}
@@ -172,34 +192,54 @@ export default function Loader({ progress, done, onGone }) {
           <g ref={tipRef} style={{ transformOrigin: '110px 110px' }}>
             <circle cx="110" cy={110 - R} r="4" fill="var(--glow)" />
           </g>
-          {/* the seal — 8 osmanthus petals around 月 */}
+          {/* the seal — jade rabbit pounding the elixir beneath a full moon */}
           <g className="seal-breath" style={{ transformOrigin: '110px 110px' }}>
-            {PETALS.map((a) => (
-              <ellipse
-                key={a}
-                cx="110"
-                cy="74"
-                rx="11"
-                ry="25"
-                fill="url(#sealFace)"
-                stroke="#F0C767"
-                strokeOpacity="0.28"
-                strokeWidth="1"
-                transform={`rotate(${a} 110 110)`}
-              />
-            ))}
-            <circle cx="110" cy="110" r="30" fill="var(--bg-0)" stroke="#F0C767" strokeOpacity="0.4" />
-            <text
-              x="110"
-              y="123"
-              textAnchor="middle"
-              className="font-display"
-              fontSize="38"
-              fill="url(#loaderGold)"
-              style={{ filter: 'drop-shadow(0 0 10px var(--accent-soft))' }}
-            >
-              月
-            </text>
+            <circle cx="110" cy="107" r="76" fill="url(#moonHalo)" />
+            <circle cx="110" cy="107" r="52" fill="url(#moonBody)" stroke="#F0C767" strokeOpacity="0.5" strokeWidth="1" />
+            {/* faint craters */}
+            <g fill="#D9A85F">
+              <ellipse cx="88" cy="84" rx="6.5" ry="4.6" opacity="0.22" />
+              <ellipse cx="134" cy="70" rx="5" ry="3.5" opacity="0.2" />
+            </g>
+            {/* the rabbit — night silhouette, sitting and leaning toward its mortar */}
+            <g fill="var(--bg-0)">
+              <ellipse cx="108" cy="72" rx="4.5" ry="12.5" transform="rotate(-14 108 72)" />
+              <ellipse cx="122" cy="70" rx="4.5" ry="12.5" transform="rotate(10 122 70)" />
+              <circle cx="116" cy="90" r="10.5" />
+              <ellipse cx="117" cy="101" rx="6.5" ry="9" transform="rotate(-18 117 101)" />
+              <ellipse cx="126" cy="112" rx="13" ry="18.5" />
+              <circle cx="130" cy="127" r="9.5" />
+              <ellipse cx="124" cy="134" rx="6" ry="3.5" />
+              <circle cx="133.5" cy="126.5" r="4.5" />
+            </g>
+            {/* mortar, same silhouette */}
+            <g fill="var(--bg-0)">
+              <path d="M74,137 Q75,152 90,153 Q105,152 106,137 Z" />
+              <ellipse cx="90" cy="137" rx="13.5" ry="4.5" />
+            </g>
+            {/* pestle + paw — gently pounding (see .loader-pestle in index.css) */}
+            <g className="loader-pestle" style={{ transformOrigin: '110px 120px' }}>
+              <circle cx="112" cy="121" r="5.5" fill="var(--bg-0)" />
+              <line x1="110" y1="120" x2="95" y2="134" stroke="var(--bg-0)" strokeWidth="4" strokeLinecap="round" />
+            </g>
+            {/* a single gold eye catches the light */}
+            <circle cx="112.5" cy="87" r="1.5" fill="#F0C767" opacity="0.9" />
+            {/* osmanthus sprig drifting off the moon's shoulder */}
+            <g>
+              <path d="M134,66 C144,60 152,58 158,60" stroke="url(#loaderGold)" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+              <Blossom x={150} y={57} />
+              <Blossom x={141} y={64} r={2.6} />
+              <Blossom x={157} y={68} r={2.4} />
+            </g>
+            {/* a few fixed gold stars between moon and ring */}
+            <g fill="#F0C767">
+              <circle cx="48" cy="96" r="1.6" opacity="0.85" />
+              <circle cx="172" cy="84" r="1.6" opacity="0.85" />
+              <circle cx="163" cy="140" r="1.3" opacity="0.7" />
+              <circle cx="57" cy="146" r="1.3" opacity="0.7" />
+            </g>
+            {/* delicate inner ring */}
+            <circle cx="110" cy="110" r="68" fill="none" stroke="#F0C767" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="1 7" strokeLinecap="round" />
           </g>
         </svg>
       </div>
