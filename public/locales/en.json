@@ -22,6 +22,7 @@
     "formation": "made of light, warmth, and a little bit of friendship",
     "longPressHint": "press & hold the mooncake",
     "moonHint": "psst — try tapping the moon",
+    "orbitHint": "spin: drag · move: 2-finger drag · zoom: pinch · reset: double-tap",
     "change": {
       "name": "Chang'e · 嫦娥",
       "text": "She drank the elixir of immortality and floated all the way to the moon, forever apart from everyone she loved. Ever since, people look up together — because under this same moon, no one is truly far away."
@@ -42,5 +43,8 @@
     "themeDawn": "Dawn",
     "themeDusk": "Dusk",
     "themeNight": "Night"
+  },
+  "meter": {
+    "label": "moon"
   }
 }

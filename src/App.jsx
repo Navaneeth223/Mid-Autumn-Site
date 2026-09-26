@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react'
 import { PreferencesProvider } from './state/prefs.jsx'
 import { preloadAssets } from './lib/preload.js'
 import { ScrollTrigger } from './lib/gsap.js'
-import { PATHS } from './lib/config.js'
 import AmbientCanvas from './components/AmbientCanvas.jsx'
 import Loader from './components/Loader.jsx'
 import UIControls from './components/UIControls.jsx'
-import MoonPhaseMeter from './components/MoonPhaseMeter.jsx'
+import ScrollMeter from './components/ScrollMeter.jsx'
 import Hero from './components/Hero.jsx'
 import ScrollStage from './components/ScrollStage.jsx'
 import Closing from './components/Closing.jsx'
@@ -62,13 +61,13 @@ export default function App() {
           <Hero ready={loaderGone} />
           <ScrollStage assets={assets} active={loaderGone} />
           <Closing />
-          <MoonPhaseMeter />
+          <ScrollMeter />
         </>
       ) : (
-        <Loader poster={PATHS.poster} progress={progress} done={false} onGone={() => {}} />
+        <Loader progress={progress} done={false} onGone={() => {}} />
       )}
       {!loaderGone && ready && (
-        <Loader poster={PATHS.poster} progress={progress} done={loaderDone} onGone={() => setLoaderGone(true)} />
+        <Loader progress={progress} done={loaderDone} onGone={() => setLoaderGone(true)} />
       )}
     </PreferencesProvider>
   )

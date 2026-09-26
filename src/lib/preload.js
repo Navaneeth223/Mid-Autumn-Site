@@ -6,7 +6,7 @@ import { FRAMES, LOAD_WEIGHTS, PATHS } from './config.js'
 // Asset preloader.
 //  - 121 webp frames (concurrency-limited pool, count-based progress)
 //  - mooncake.glb (streaming fetch => real byte progress, then GLTF parse)
-//  - locale JSONs + the poster still (tiny, but they gate first paint)
+//  - locale JSONs (tiny, but they gate first paint)
 // Everything is weighted (LOAD_WEIGHTS) into one 0..1 progress number for the
 // loader screen. Partial failure never blocks the site forever: after the
 // hard timeout we continue with whatever arrived (drawFrame tolerates gaps).
@@ -91,11 +91,10 @@ export function preloadAssets(onProgress) {
   const result = { frames: new Array(FRAMES.count).fill(null), gltf: null, locales: null, webglOK: detectWebGL() }
 
   const work = (async () => {
-    // -- misc: locales + poster (the loader screen itself needs the poster)
+    // -- misc: locales (the loader UI itself needs the translated line)
     const miscJobs = [
       fetchJSON(PATHS.locales.en),
       fetchJSON(PATHS.locales.zh),
-      loadImage(PATHS.poster),
     ]
     let miscDone = 0
     const locales = await Promise.all(

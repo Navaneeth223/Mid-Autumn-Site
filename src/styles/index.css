@@ -131,6 +131,26 @@ body.scroll-locked {
 }
 .yolk-glow { animation: yolk-glow 2.2s ease-in-out infinite; }
 
+/* Loader — twinkling stars, drifting gold dust, breathing seal. */
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.14; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.2); }
+}
+.loader-star { animation: star-twinkle 2.6s ease-in-out infinite; }
+
+@keyframes dust-rise {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
+  12% { opacity: 0.55; }
+  100% { transform: translate3d(16px, -46vh, 0) scale(0.5); opacity: 0; }
+}
+.loader-dust { animation: dust-rise 7s linear infinite; }
+
+@keyframes seal-breath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+.seal-breath { animation: seal-breath 3.2s ease-in-out infinite; }
+
 /* ------------------------------------------------- reduced-motion policy */
 /* Keeps ALL content, drops loops/pulses; the scrub is disabled in JS and the
    stage renders a static poster instead. */
@@ -140,7 +160,10 @@ body.scroll-locked {
   .ring-pulse,
   .rabbit-pestle,
   .floaty,
-  .yolk-glow {
+  .yolk-glow,
+  .loader-star,
+  .loader-dust,
+  .seal-breath {
     animation: none !important;
   }
 }

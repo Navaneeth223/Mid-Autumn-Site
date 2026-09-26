@@ -11,20 +11,21 @@ export const PATHS = {
   frames: (i) => assetUrl(`frames/frame_${String(i + 1).padStart(4, '0')}.webp`),
   model: assetUrl('models/mooncake.glb'),
   dracoDecoder: assetUrl('models/draco/'),
-  poster: assetUrl('images/poster-hero.webp'),
   closingBg: assetUrl('images/closing-bg.webp'),
   images: {
     rabbit: assetUrl('images/jade-rabbit.svg'),
     lantern: assetUrl('images/paper-lantern.svg'),
     branch: assetUrl('images/osmanthus-branch.svg'),
-    change: assetUrl('images/change-silhouette.svg'),
+    // Chang'e easter-egg art (Moon Palace vignette — rendered from assect/change-art.svg)
+    change: assetUrl('images/change-art.png'),
     petal: assetUrl('images/petal.svg'),
   },
   locales: { en: assetUrl('locales/en.json'), zh: assetUrl('locales/zh.json') },
 }
 
 // The Variant-B frame sequence (extracted at the video's native 24fps, 2×
-// re-master from the 1080p source so the scrub stays crisp on high-dpr phones).
+// re-master from the 1080p source — lanczos downscale, webp q84 — so the scrub
+// stays crisp on high-dpr phones).
 export const FRAMES = { count: 121, width: 1440, height: 736 }
 
 // Where things sit INSIDE the last Variant-B frame (fractions 0..1 of the

@@ -3,9 +3,10 @@ import { gsap } from '../lib/gsap.js'
 import { PATHS } from '../lib/config.js'
 
 // ---------------------------------------------------------------------------
-// Chang'e panel — the reward for tapping the moon. The silhouette + a short
-// EN/ZH caption of the elixir legend. show(anchorPx) / hide() are imperative
-// so ScrollStage stays in control of timing and positioning.
+// Chang'e panel — the reward for tapping the moon. The Moon Palace vignette
+// (jade rabbit pounding the elixir, hand-built SVG rendered to PNG) + a short
+// EN/ZH caption of the legend. show(anchorPx) / hide() are imperative so
+// ScrollStage stays in control of timing and positioning.
 // ---------------------------------------------------------------------------
 const ChangEPanel = forwardRef(function ChangEPanel({ name, text }, ref) {
   const rootRef = useRef(null)
@@ -14,7 +15,12 @@ const ChangEPanel = forwardRef(function ChangEPanel({ name, text }, ref) {
     show(anchor) {
       const el = rootRef.current
       if (!el) return
-      el.style.left = `${anchor.x}px`
+      // clamp inside the viewport: the moon anchor can sit near the screen
+      // edge on portrait phones (cover-crop pushes it to ~90% width)
+      const half = el.offsetWidth / 2
+      const vw = window.innerWidth
+      const x = Math.min(vw - half - 8, Math.max(half + 8, anchor.x))
+      el.style.left = `${x}px`
       el.style.top = `${anchor.y + anchor.r}px`
       gsap.killTweensOf(el)
       gsap.fromTo(
@@ -39,9 +45,9 @@ const ChangEPanel = forwardRef(function ChangEPanel({ name, text }, ref) {
     >
       <img
         src={PATHS.images.change}
-        alt="Chang'e, the moon goddess"
+        alt="Chang'e's moon — the jade rabbit pounding the elixir of immortality"
         draggable="false"
-        className="floaty mx-auto w-40 drop-shadow-[0_10px_30px_var(--shadow)] md:w-52"
+        className="floaty mx-auto w-44 drop-shadow-[0_10px_30px_var(--shadow)] md:w-56"
       />
       <div className="glass-card mt-2 p-4 text-center">
         <p className="font-display text-base" style={{ color: 'var(--accent)' }}>

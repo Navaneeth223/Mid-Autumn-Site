@@ -76,6 +76,18 @@ await journey('mobile', { ...devices['Pixel 7'], deviceScaleFactor: 2 }, async (
   await page.waitForTimeout(500)
   await page.screenshot({ path: `${shotsDir}/${name}-8-cross-section.png` })
 
+  // product-viewer: orbit drag on the cake, then double-tap reset
+  await page.mouse.move(vp.width * 0.47, vp.height * 0.42)
+  await page.mouse.down()
+  for (let i = 1; i <= 12; i++) {
+    await page.mouse.move(vp.width * 0.47 + i * 7, vp.height * 0.42 - i * 4, { steps: 2 })
+  }
+  await page.mouse.up()
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: `${shotsDir}/${name}-8b-orbit.png` })
+  await page.mouse.dblclick(vp.width * 0.47, vp.height * 0.42)
+  await page.waitForTimeout(600)
+
   // closing
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await page.waitForTimeout(1900)
@@ -94,6 +106,14 @@ await journey('desktop', { viewport: { width: 1440, height: 900 } }, async (page
   await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * 0.78))
   await page.waitForTimeout(1000)
   await page.screenshot({ path: `${shotsDir}/${name}-3-drift.png` })
+
+  // product-viewer: wheel zoom in on the cake, then double-click to reset
+  await page.mouse.move(667, 350)
+  await page.mouse.wheel(0, -260)
+  await page.waitForTimeout(450)
+  await page.screenshot({ path: `${shotsDir}/${name}-3b-zoom.png` })
+  await page.mouse.dblclick(667, 350)
+  await page.waitForTimeout(600)
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await page.waitForTimeout(1700)
   await page.screenshot({ path: `${shotsDir}/${name}-4-closing.png` })
