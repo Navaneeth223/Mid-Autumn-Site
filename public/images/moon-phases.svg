@@ -1,0 +1,28 @@
+﻿<svg viewBox="0 0 580 90" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <!-- lit base disks (fully bright, the "full moon" disk) -->
+  <circle cx="40" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="110" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="180" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="250" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="320" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="390" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="460" cy="45" r="30" fill="#FCEFD9"/>
+  <circle cx="530" cy="45" r="30" fill="#FCEFD9"/>
+
+  <!-- shadow overlay: two-arc "moon phase" path (right limb + terminator ellipse), no masks needed -->
+  <path d="M40,15 A30,30 0 0 1 40,75 A30.00,30 0 0 1 40,15 Z" fill="#1B1B3A"/>
+  <path d="M110,15 A30,30 0 0 1 110,75 A21.43,30 0 0 1 110,15 Z" fill="#1B1B3A"/>
+  <path d="M180,15 A30,30 0 0 1 180,75 A12.86,30 0 0 1 180,15 Z" fill="#1B1B3A"/>
+  <path d="M250,15 A30,30 0 0 1 250,75 A4.29,30 0 0 1 250,15 Z" fill="#1B1B3A"/>
+  <path d="M320,15 A30,30 0 0 1 320,75 A4.29,30 0 0 0 320,15 Z" fill="#1B1B3A"/>
+  <path d="M390,15 A30,30 0 0 1 390,75 A12.86,30 0 0 0 390,15 Z" fill="#1B1B3A"/>
+  <path d="M460,15 A30,30 0 0 1 460,75 A21.43,30 0 0 0 460,15 Z" fill="#1B1B3A"/>
+  <path d="M530,15 A30,30 0 0 1 530,75 A30.00,30 0 0 0 530,15 Z" fill="#1B1B3A"/>
+
+  <!-- thin gold outline ring on each -->
+  <g fill="none" stroke="#D9A441" stroke-width="1.5" opacity="0.6">
+    <circle cx="40" cy="45" r="30"/><circle cx="110" cy="45" r="30"/><circle cx="180" cy="45" r="30"/>
+    <circle cx="250" cy="45" r="30"/><circle cx="320" cy="45" r="30"/><circle cx="390" cy="45" r="30"/>
+    <circle cx="460" cy="45" r="30"/><circle cx="530" cy="45" r="30"/>
+  </g>
+</svg>

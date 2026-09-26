@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>For Ames 🌕</title>
+    <meta
+      name="description"
+      content="A little Mid-Autumn Festival gift — a mooncake formed from light, warmth, and friendship."
+    />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/favicon-192.png" />
+    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png" />
+    <meta name="theme-color" content="#060612" />
+
+    <!-- Set the theme BEFORE first paint (no flash of wrong palette).
+         Auto-selects by device clock: 5-11 dawn / 11-19 dusk / 19-5 night.
+         A saved manual choice in localStorage always wins. -->
+    <script>
+      (function () {
+        try {
+          var h = new Date().getHours()
+          var auto = h >= 5 && h < 11 ? 'dawn' : h >= 11 && h < 19 ? 'dusk' : 'night'
+          var saved = localStorage.getItem('ma-theme')
+          var theme = saved === 'dawn' || saved === 'dusk' || saved === 'night' ? saved : auto
+          document.documentElement.setAttribute('data-theme', theme)
+          document.documentElement.lang = localStorage.getItem('ma-lang') === 'zh' ? 'zh-CN' : 'en'
+        } catch (e) {
+          /* private mode etc. — defaults already set on <html> */
+        }
+      })()
+    </script>
+
+    <style>
+      /* Critical inline CSS: something pleasant on screen during the ~200ms
+         before the app bundle executes (no white flash, no blank black). */
+      html,
+      body {
+        margin: 0;
+        background: #060612;
+        min-height: 100%;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      .boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #f0c767;
+        font-family: Georgia, serif;
+        font-size: 42px;
+        animation: bootpulse 1.6s ease-in-out infinite;
+      }
+      @keyframes bootpulse {
+        0%,
+        100% {
+          opacity: 0.55;
+          transform: scale(0.97);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.03);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div class="boot">🌕</div></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

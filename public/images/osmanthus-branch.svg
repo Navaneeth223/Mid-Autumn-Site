@@ -1,0 +1,52 @@
+﻿<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <!-- branch -->
+  <path d="M10,150 C90,130 140,90 180,60 C210,38 240,26 305,14" fill="none" stroke="#7A5C3E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M120,108 C130,95 138,88 150,80" fill="none" stroke="#7A5C3E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M210,44 C220,52 228,58 236,68" fill="none" stroke="#7A5C3E" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- leaves -->
+  <ellipse cx="95" cy="122" rx="16" ry="7" fill="#7C9A5B" transform="rotate(-30 95 122)"/>
+  <ellipse cx="165" cy="70" rx="15" ry="6.5" fill="#8CA968" transform="rotate(-40 165 70)"/>
+  <ellipse cx="255" cy="30" rx="14" ry="6" fill="#7C9A5B" transform="rotate(-20 255 30)"/>
+  <ellipse cx="145" cy="86" rx="11" ry="5" fill="#8CA968" transform="rotate(35 145 86)"/>
+
+  <!-- blossom clusters: each is 5 small petals around a center -->
+  <g>
+    <g transform="translate(150,80)">
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(0)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(72)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(144)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(216)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(288)"/>
+      <circle r="4" fill="#C9922E"/>
+    </g>
+    <g transform="translate(178,58) scale(0.75)">
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(10)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(82)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(154)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(226)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(298)"/>
+      <circle r="4" fill="#C9922E"/>
+    </g>
+    <g transform="translate(236,66) scale(0.65)">
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(-15)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(57)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(129)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(201)"/>
+      <ellipse rx="6" ry="9" fill="#E8B84B" transform="rotate(273)"/>
+      <circle r="4" fill="#C9922E"/>
+    </g>
+    <g transform="translate(258,26) scale(0.7)">
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(20)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(92)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(164)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(236)"/>
+      <ellipse rx="6" ry="9" fill="#F0C767" transform="rotate(308)"/>
+      <circle r="4" fill="#C9922E"/>
+    </g>
+  </g>
+
+  <!-- a few drifting loose petals, handy as standalone "falling petal" sprites too -->
+  <ellipse cx="60" cy="60" rx="5" ry="7.5" fill="#E8B84B" opacity="0.85" transform="rotate(25 60 60)"/>
+  <ellipse cx="40" cy="95" rx="4" ry="6" fill="#F0C767" opacity="0.7" transform="rotate(-10 40 95)"/>
+</svg>

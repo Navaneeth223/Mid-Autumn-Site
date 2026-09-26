@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 24">
+  <!-- single osmanthus petal (matches the loose petals in osmanthus-branch.svg);
+       uses currentColor so themes/CSS can tint it -->
+  <ellipse cx="8" cy="12" rx="5" ry="7.5" fill="currentColor" transform="rotate(25 8 12)"/>
+</svg>

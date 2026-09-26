@@ -1,0 +1,46 @@
+{
+  "_comment": [
+    "PERSONAL WORDS LIVE HERE — Ames, this file is for Navi to edit.",
+    "Keys you probably want to make your own: hero.personal and closing.message.",
+    "Keep the same keys in zh.json so both language modes stay in sync.",
+    "'Ames' and 'Navi' are names — they stay in Latin letters in both modes."
+  ],
+  "meta": {
+    "title": "For Ames 🌕",
+    "langLabel": "EN"
+  },
+  "loader": {
+    "line": "steeping the moonlight…",
+    "pct": "{pct}%"
+  },
+  "hero": {
+    "title": "Happy Mid-Autumn, Ames",
+    "personal": "We met not long ago — but friendship works like the moon: never in a hurry, just growing a little rounder every night.",
+    "scrollHint": "scroll to begin"
+  },
+  "stage": {
+    "formation": "made of light, warmth, and a little bit of friendship",
+    "longPressHint": "press & hold the mooncake",
+    "moonHint": "psst — try tapping the moon",
+    "change": {
+      "name": "Chang'e · 嫦娥",
+      "text": "She drank the elixir of immortality and floated all the way to the moon, forever apart from everyone she loved. Ever since, people look up together — because under this same moon, no one is truly far away."
+    },
+    "cross": {
+      "title": "the shape of reunion",
+      "text": "Round, like the full moon — in Chinese, 圆 (yuán) means both “round” and “together again”. And the golden center? That's the salted egg yolk: the moon itself, hiding inside."
+    }
+  },
+  "closing": {
+    "shi": "但愿人长久，千里共婵娟",
+    "shiNote": "— Su Shi, a thousand-year-old wish for the people we miss",
+    "title": "Happy Mid-Autumn Festival, Ames",
+    "message": "Thank you for finding your way into my year. Tonight the moon is exactly the same above both of us — so eat something sweet, look up once, and save me a mooncake. (Burgers still count as festival food, as long as you eat them under the moon.)",
+    "signature": "— Navi"
+  },
+  "ui": {
+    "themeDawn": "Dawn",
+    "themeDusk": "Dusk",
+    "themeNight": "Night"
+  }
+}

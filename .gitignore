@@ -1,0 +1,7 @@
+node_modules/
+dist/
+# scratch folder used while preparing assets (safe to delete)
+_samples/
+# local env files
+.env
+.DS_Store

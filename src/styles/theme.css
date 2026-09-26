@@ -1,0 +1,71 @@
+/* ===========================================================================
+   Theme tokens — three moon-themed palettes as CSS custom properties.
+   Switching = flipping data-theme on <html>: instant, no re-render flicker.
+   =========================================================================== */
+
+:root {
+  --font-display: 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', 'Songti SC', 'Noto Serif CJK SC', 'Noto Serif SC', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+
+  /* read by the ambient-canvas painter (stars / petals) */
+  --star-count: 150;
+  --petal-count: 5;
+}
+
+/* ------- NIGHT (19:00–05:00): deep indigo, stars, glowing full moon ------- */
+:root[data-theme='night'] {
+  --bg-0: #060612;
+  --bg-1: #0d1030;
+  --bg-2: #1a1440;
+  --text: #f3ead7;
+  --text-dim: rgba(243, 234, 215, 0.64);
+  --accent: #f0c767;
+  --accent-soft: rgba(240, 199, 103, 0.25);
+  --glow: rgba(255, 224, 150, 0.85);
+  --card: rgba(14, 14, 40, 0.62);
+  --card-border: rgba(240, 199, 103, 0.28);
+  --star: 255, 244, 214;
+  --petal: #e8b84b;
+  --shadow: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+/* ------- DUSK (11:00–19:00): warm amber / rose, lantern-glow accents ------ */
+:root[data-theme='dusk'] {
+  --bg-0: #1c1030;
+  --bg-1: #5b2340;
+  --bg-2: #b45a3c;
+  --text: #fdeed8;
+  --text-dim: rgba(253, 238, 216, 0.66);
+  --accent: #f2a65e;
+  --accent-soft: rgba(242, 166, 94, 0.25);
+  --glow: rgba(255, 190, 120, 0.8);
+  --card: rgba(46, 22, 44, 0.58);
+  --card-border: rgba(242, 166, 94, 0.3);
+  --star: 255, 224, 190;
+  --petal: #f0c767;
+  --shadow: rgba(20, 8, 20, 0.5);
+  color-scheme: dark;
+}
+
+/* ------- DAWN (05:00–11:00): soft pastel pink / blue / gold --------------- */
+:root[data-theme='dawn'] {
+  --bg-0: #fdeef3;
+  --bg-1: #dcecfb;
+  --bg-2: #ffe9c4;
+  --text: #46355c;
+  --text-dim: rgba(70, 53, 92, 0.62);
+  --accent: #d9a441;
+  --accent-soft: rgba(217, 164, 65, 0.22);
+  --glow: rgba(255, 214, 140, 0.9);
+  --card: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(217, 164, 65, 0.35);
+  --star: 255, 255, 255;
+  --petal: #e8b84b;
+  --shadow: rgba(90, 60, 90, 0.18);
+  color-scheme: light;
+}
+
+/* Dawn is bright: fewer stars so the sky still reads as sky. */
+:root[data-theme='dawn'] { --star-count: 26; --petal-count: 3; }
+:root[data-theme='dusk'] { --star-count: 46; --petal-count: 6; }

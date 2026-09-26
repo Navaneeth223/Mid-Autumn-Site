@@ -1,0 +1,47 @@
+﻿<svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <defs>
+    <radialGradient id="lanternGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFDFA0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFDFA0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lanternBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A9291E"/>
+      <stop offset="50%" stop-color="#D4402E"/>
+      <stop offset="100%" stop-color="#A9291E"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="100" cy="140" r="105" fill="url(#lanternGlow)"/>
+
+  <!-- hanging string -->
+  <line x1="100" y1="8" x2="100" y2="35" stroke="#B9812E" stroke-width="3"/>
+
+  <!-- top cap -->
+  <path d="M70,35 L130,35 L122,52 L78,52 Z" fill="#E0A94A"/>
+  <rect x="92" y="30" width="16" height="8" rx="3" fill="#B9812E"/>
+
+  <!-- lantern body -->
+  <ellipse cx="100" cy="140" rx="75" ry="88" fill="url(#lanternBody)"/>
+
+  <!-- ribs -->
+  <g stroke="#8C1F16" stroke-width="2.5" opacity="0.6">
+    <path d="M62,60 Q40,140 62,220" fill="none"/>
+    <path d="M81,52 Q64,140 81,228" fill="none"/>
+    <path d="M100,50 L100,230" fill="none"/>
+    <path d="M119,52 Q136,140 119,228" fill="none"/>
+    <path d="M138,60 Q160,140 138,220" fill="none"/>
+  </g>
+
+  <!-- soft highlight -->
+  <ellipse cx="78" cy="105" rx="18" ry="34" fill="#FFFFFF" opacity="0.18"/>
+
+  <!-- bottom cap -->
+  <path d="M78,228 L122,228 L130,245 L70,245 Z" fill="#E0A94A"/>
+  <rect x="92" y="242" width="16" height="8" rx="3" fill="#B9812E"/>
+
+  <!-- tassel -->
+  <line x1="100" y1="250" x2="100" y2="272" stroke="#D9A441" stroke-width="2.5"/>
+  <circle cx="100" cy="276" r="7" fill="#D9A441"/>
+  <line x1="88" y1="252" x2="84" y2="270" stroke="#D9A441" stroke-width="2"/>
+  <line x1="112" y1="252" x2="116" y2="270" stroke="#D9A441" stroke-width="2"/>
+</svg>

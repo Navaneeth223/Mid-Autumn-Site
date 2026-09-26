@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- mini mooncake favicon: scalloped edge, lattice top, golden yolk sheen -->
+  <defs>
+    <radialGradient id="cake" cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#F7D18C"/>
+      <stop offset="0.55" stop-color="#E2A24F"/>
+      <stop offset="1" stop-color="#B97E2C"/>
+    </radialGradient>
+    <clipPath id="top"><circle cx="32" cy="32" r="16.5"/></clipPath>
+  </defs>
+  <!-- scalloped rim -->
+  <g fill="#D99B41">
+    <circle cx="32" cy="9" r="7"/><circle cx="43.5" cy="12.1" r="7"/>
+    <circle cx="51.9" cy="20.5" r="7"/><circle cx="55" cy="32" r="7"/>
+    <circle cx="51.9" cy="43.5" r="7"/><circle cx="43.5" cy="51.9" r="7"/>
+    <circle cx="32" cy="55" r="7"/><circle cx="20.5" cy="51.9" r="7"/>
+    <circle cx="12.1" cy="43.5" r="7"/><circle cx="9" cy="32" r="7"/>
+    <circle cx="12.1" cy="20.5" r="7"/><circle cx="20.5" cy="12.1" r="7"/>
+  </g>
+  <circle cx="32" cy="32" r="24" fill="url(#cake)"/>
+  <!-- lattice stamp -->
+  <g clip-path="url(#top)" stroke="#B97E2C" stroke-width="2.1" opacity="0.85" fill="none">
+    <path d="M8 32 L56 32"/>
+    <path d="M8 18 L56 46"/><path d="M8 46 L56 18"/>
+    <path d="M14 6 L50 58"/><path d="M50 6 L14 58"/>
+    <path d="M22 0 L42 64"/><path d="M42 0 L22 64"/>
+  </g>
+  <circle cx="32" cy="32" r="16.5" fill="none" stroke="#B97E2C" stroke-width="1.7" opacity="0.9"/>
+</svg>

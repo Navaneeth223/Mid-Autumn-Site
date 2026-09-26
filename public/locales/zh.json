@@ -1,0 +1,45 @@
+{
+  "_comment": [
+    "PERSONAL WORDS LIVE HERE — Ames，这个文件由 Navi 来改。",
+    "最想改的两个键：hero.personal 和 closing.message。",
+    "键名需与 en.json 保持一致；Ames / Navi 是名字，两种语言里都保留英文。"
+  ],
+  "meta": {
+    "title": "For Ames 🌕",
+    "langLabel": "中文"
+  },
+  "loader": {
+    "line": "正在把月光熬成糖浆……",
+    "pct": "{pct}%"
+  },
+  "hero": {
+    "title": "Ames，中秋节快乐",
+    "personal": "我们认识不久——但友谊和月亮一样，从不着急，只是一夜比一夜更圆。",
+    "scrollHint": "向下滑，开始"
+  },
+  "stage": {
+    "formation": "由光、温度，和一点点友谊做成",
+    "longPressHint": "长按这块月饼试试",
+    "moonHint": "悄悄说——月亮可以点一下",
+    "change": {
+      "name": "嫦娥",
+      "text": "她误食不死药，飘然奔月，从此与所爱之人天各一方。所以人们总在同一晚抬头望月——同一轮月亮之下，没有人真正遥远。"
+    },
+    "cross": {
+      "title": "团圆的形状",
+      "text": "月饼是圆的，“圆”也是“团圆”。而那颗金黄的芯，就是藏在里面的那一轮满月。"
+    }
+  },
+  "closing": {
+    "shi": "但愿人长久，千里共婵娟",
+    "shiNote": "—— 苏轼，一句说了一千年的愿望",
+    "title": "Ames，中秋节快乐",
+    "message": "谢谢你走进我这一年。今晚，我们头顶是同一轮月亮——吃点甜的，抬头看一眼，再替我留一块月饼。（只要是在月亮底下吃的，汉堡也算节日大餐。）",
+    "signature": "—— Navi"
+  },
+  "ui": {
+    "themeDawn": "清晨",
+    "themeDusk": "黄昏",
+    "themeNight": "夜"
+  }
+}
