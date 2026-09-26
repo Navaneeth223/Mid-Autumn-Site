@@ -23,8 +23,9 @@ export const PATHS = {
   locales: { en: assetUrl('locales/en.json'), zh: assetUrl('locales/zh.json') },
 }
 
-// The Variant-B frame sequence (extracted at the video's native 24fps).
-export const FRAMES = { count: 121, width: 720, height: 368 }
+// The Variant-B frame sequence (extracted at the video's native 24fps, 2×
+// re-master from the 1080p source so the scrub stays crisp on high-dpr phones).
+export const FRAMES = { count: 121, width: 1440, height: 736 }
 
 // Where things sit INSIDE the last Variant-B frame (fractions 0..1 of the
 // frame image). The 3D cake is placed onto the flat cake's spot, and the
