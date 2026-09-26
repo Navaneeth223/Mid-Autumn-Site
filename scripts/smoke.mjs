@@ -41,11 +41,16 @@ await journey('mobile', { ...devices['Pixel 7'], deviceScaleFactor: 2 }, async (
   await page.screenshot({ path: `${shotsDir}/${name}-1-hero.png` })
 
   const total = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight)
+  // layout: hero -> festival panel -> pinned stage (formation -> 3D finale).
+  // The stage owns most of the page now, so beats sit deep: 0.14 the festival
+  // panel, 0.30 the burst zone, 0.52 mid-formation, 0.72 the pop-out, 0.87
+  // the parked cake (easter eggs arm from ~0.75 of the pin onward).
   const stops = [
-    ['2-scrub-early', 0.18],
-    ['3-scrub-late', 0.42],
-    ['4-popout', 0.6],
-    ['5-drift', 0.72],
+    ['2-festival', 0.14],
+    ['3-scrub-early', 0.3],
+    ['4-scrub-late', 0.52],
+    ['5-popout', 0.72],
+    ['6-drift', 0.87],
   ]
   for (const [label, f] of stops) {
     await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * f))
@@ -58,13 +63,13 @@ await journey('mobile', { ...devices['Pixel 7'], deviceScaleFactor: 2 }, async (
   if (await rabbit.count()) {
     await rabbit.click({ force: true }).catch((e) => errors.push(`[${name}] rabbit click: ${e.message}`))
     await page.waitForTimeout(450)
-    await page.screenshot({ path: `${shotsDir}/${name}-6-rabbit-burst.png` })
+    await page.screenshot({ path: `${shotsDir}/${name}-7-rabbit-burst.png` })
   }
   const moon = page.locator('button[aria-label*="moon"]')
   if (await moon.count()) {
     await moon.click({ force: true }).catch((e) => errors.push(`[${name}] moon click: ${e.message}`))
     await page.waitForTimeout(900)
-    await page.screenshot({ path: `${shotsDir}/${name}-7-change.png` })
+    await page.screenshot({ path: `${shotsDir}/${name}-8-change.png` })
   }
 
   // long-press the cake (hold mouse down 800ms at the cake anchor)
@@ -74,7 +79,7 @@ await journey('mobile', { ...devices['Pixel 7'], deviceScaleFactor: 2 }, async (
   await page.waitForTimeout(850)
   await page.mouse.up()
   await page.waitForTimeout(500)
-  await page.screenshot({ path: `${shotsDir}/${name}-8-cross-section.png` })
+  await page.screenshot({ path: `${shotsDir}/${name}-9-cross-section.png` })
 
   // product-viewer: orbit drag on the cake, then double-tap reset
   await page.mouse.move(vp.width * 0.47, vp.height * 0.42)
@@ -84,14 +89,14 @@ await journey('mobile', { ...devices['Pixel 7'], deviceScaleFactor: 2 }, async (
   }
   await page.mouse.up()
   await page.waitForTimeout(400)
-  await page.screenshot({ path: `${shotsDir}/${name}-8b-orbit.png` })
+  await page.screenshot({ path: `${shotsDir}/${name}-9b-orbit.png` })
   await page.mouse.dblclick(vp.width * 0.47, vp.height * 0.42)
   await page.waitForTimeout(600)
 
-  // closing
+  // the pinned stage is the finale — scrolling to the bottom parks the cake
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await page.waitForTimeout(1900)
-  await page.screenshot({ path: `${shotsDir}/${name}-9-closing.png` })
+  await page.screenshot({ path: `${shotsDir}/${name}-10-finale.png` })
 })
 
 // ----------------------------------------------------------------- desktop
@@ -103,7 +108,7 @@ await journey('desktop', { viewport: { width: 1440, height: 900 } }, async (page
   await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * 0.3))
   await page.waitForTimeout(1000)
   await page.screenshot({ path: `${shotsDir}/${name}-2-scrub.png` })
-  await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * 0.78))
+  await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * 0.82))
   await page.waitForTimeout(1000)
   await page.screenshot({ path: `${shotsDir}/${name}-3-drift.png` })
 
@@ -116,7 +121,7 @@ await journey('desktop', { viewport: { width: 1440, height: 900 } }, async (page
   await page.waitForTimeout(600)
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await page.waitForTimeout(1700)
-  await page.screenshot({ path: `${shotsDir}/${name}-4-closing.png` })
+  await page.screenshot({ path: `${shotsDir}/${name}-4-finale.png` })
 })
 
 // ---------------------------------------------------- reduced-motion profile
@@ -124,8 +129,8 @@ await journey('reduced', { ...devices['Pixel 7'], reducedMotion: 'reduce' }, asy
   await waitReady(page)
   await page.waitForTimeout(1400)
   await page.screenshot({ path: `${shotsDir}/${name}-1-hero.png` })
-  const total = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight)
-  await page.evaluate((y) => window.scrollTo(0, y), Math.round(total * 0.75))
+  // reduced: no pin — the static final-frame stage now sits at the page end
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await page.waitForTimeout(900)
   await page.screenshot({ path: `${shotsDir}/${name}-2-stage-static.png` })
 })

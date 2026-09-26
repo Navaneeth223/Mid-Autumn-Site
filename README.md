@@ -13,14 +13,20 @@ Festival gift from **Navi** to **Ames**.
    arrive unevenly. Scroll is locked until everything is ready.
 2. **Hero** — bilingual greeting addressed to Ames, glowing moon, swaying
    paper lantern, twinkling stars, "scroll to begin".
-3. **The formation (pinned scroll scrub)** — 121 video frames drawn 1:1 onto
+3. **Festival panel** — "Happy Mid-Autumn Festival, Ames" with the Variant-A
+   cake still glowing behind it (the image the mooncake will later step out
+   of), the thousand-year-old Su Shi line 但愿人长久，千里共婵娟, and Navi's
+   signed message.
+4. **The formation (pinned scroll scrub)** — 121 video frames drawn 1:1 onto
    a `<canvas>` tied to scroll: particles swirl, petals ring, the cake
-   condenses out of light and settles. Scroll back up = it dissolves again.
-4. **Pop-out** — the 2D canvas crossfades into the real 3D mooncake
-   (Three.js), positioned exactly where the flat cake sat in the last frame.
-5. **Hands-on 3D viewer + easter eggs** — the cake swells to hero size,
-   settles into a 3/4 pose, and parks (no auto-wander). From here it's a
-   product viewer you can really play with:
+   condenses out of light and settles — stretched across a long, slow scroll
+   so nothing rushes. Scroll back up = it dissolves again.
+5. **Pop-out** — the 2D canvas crossfades into the real 3D mooncake
+   (Three.js), positioned exactly where the flat cake sat in the last frame,
+   so the cake appears to step out of the image.
+6. **Hands-on 3D viewer + easter eggs (the finale)** — the cake swells to
+   hero size, settles into a 3/4 pose, and parks (no auto-wander). From here
+   it's a product viewer you can really play with:
    - **drag** → trackball spin — any axis, flip it over and see the bottom
    - **two-finger drag** (or Shift/right-drag on desktop) → move it anywhere;
      it springs home on release
@@ -35,8 +41,8 @@ Festival gift from **Navi** to **Ames**.
      the golden yolk = the full moon itself
    - a slim journey rail on the right edge tracks progress (gold fill +
      glowing tip + live percentage)
-6. **Closing** — a message signed "— Navi", under the thousand-year-old Su Shi
-   line 但愿人长久，千里共婵娟, with petals still drifting.
+
+The journey ends here, on the cake itself — petals keep drifting.
 
 Themes **dawn / dusk / night** auto-select by the visitor's clock (5–11 / 11–19
 / 19–5) and can be cycled manually (corner button). **EN / 中文** toggle
@@ -66,7 +72,7 @@ All personal words live in **two JSON files** — edit the same keys in both:
 | File | Key | What it is |
 |---|---|---|
 | `public/locales/en.json` | `hero.personal` | the line addressed to Ames on the hero |
-| `public/locales/en.json` | `closing.message` | the closing message (a light burger-and-cola nod is baked in — keep, change, or delete it) |
+| `public/locales/en.json` | `closing.message` | the festival-panel message (shown right after the hero; a light burger-and-cola nod is baked in — keep, change, or delete it) |
 | `public/locales/zh.json` | same keys | the Chinese versions |
 
 Also worth knowing:

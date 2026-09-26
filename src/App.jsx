@@ -15,8 +15,9 @@ import Closing from './components/Closing.jsx'
 //   boot      -> preloadAssets (frames + model + locales + poster) with a
 //                single weighted progress number for the loader
 //   loader    -> poster bg + moon-phase progress; scroll LOCKED until done
-//   app       -> hero -> pinned scroll stage -> closing, plus ambient canvas,
-//                corner controls and the moon-phase scroll meter
+//   app       -> hero -> festival panel (cake image + message) -> pinned
+//                scroll stage (formation -> 3D cake finale), plus ambient
+//                canvas, corner controls and the moon-phase scroll meter
 // ---------------------------------------------------------------------------
 export default function App() {
   const [assets, setAssets] = useState(null)
@@ -59,8 +60,8 @@ export default function App() {
         <>
           <UIControls />
           <Hero ready={loaderGone} />
-          <ScrollStage assets={assets} active={loaderGone} />
           <Closing />
+          <ScrollStage assets={assets} active={loaderGone} />
           <ScrollMeter />
         </>
       ) : (

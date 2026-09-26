@@ -36,17 +36,24 @@ export const CAKE_ANCHOR = { x: 0.47, y: 0.38, size: 0.42 }
 export const MOON_ANCHOR = { x: 0.6, y: 0.16, r: 0.16 }
 
 // Master scroll-timeline breakpoints (fractions of the pinned stage):
-//   0.00 – 0.55  frame-sequence scrub (Variant B formation)
-//   0.55 – 0.64  crossfade 2D canvas -> WebGL mooncake ("pop-out")
-//   0.64 – 1.00  drift + wiggle + easter eggs
+//   0.00 – 0.62  frame-sequence scrub (Variant B formation) — deliberately
+//                wide so the swirl / burst / settle reads slow and cinematic
+//   0.62 – 0.70  crossfade 2D canvas -> WebGL mooncake ("pop-out": the cake
+//                steps out of the last frame)
+//   0.70 – 1.00  swell + settle + easter eggs (the finale; nothing after it)
+// NOTE: these are fractions of the GSAP timeline, whose total duration must
+// stay 1.0 — a tl.call scheduled beyond the end stretches the duration and
+// silently rescales every beat (that's how the formation once became ~8x too
+// fast: the whole scrub was squeezed into ~8% of the pin).
 export const TL = {
-  scrubEnd: 0.55,
-  popEnd: 0.64,
+  scrubEnd: 0.62,
+  popEnd: 0.70,
 }
 
-// Scroll length of the pinned stage, in viewport heights (620% => plenty of
-// room: ~340vh for 121 frames, ~230vh of drift/easter eggs).
-export const PIN_DISTANCE_VH = 620
+// Scroll length of the pinned stage, in viewport heights (800% => ~495vh for
+// the 121 formation frames, ~65vh for the pop-out crossfade, ~240vh of
+// finale/easter eggs).
+export const PIN_DISTANCE_VH = 800
 
 // Loading weight split for the progress percentage.
 export const LOAD_WEIGHTS = { frames: 0.55, model: 0.38, misc: 0.07 }

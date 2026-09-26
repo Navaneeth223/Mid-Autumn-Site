@@ -91,10 +91,13 @@ export function preloadAssets(onProgress) {
   const result = { frames: new Array(FRAMES.count).fill(null), gltf: null, locales: null, webglOK: detectWebGL() }
 
   const work = (async () => {
-    // -- misc: locales (the loader UI itself needs the translated line)
+    // -- misc: locales (the loader UI itself needs the translated line) plus
+    // the festival-panel backdrop — it's the second screen now, so it should
+    // be warm in cache before the loader lets go
     const miscJobs = [
       fetchJSON(PATHS.locales.en),
       fetchJSON(PATHS.locales.zh),
+      loadImage(PATHS.closingBg),
     ]
     let miscDone = 0
     const locales = await Promise.all(

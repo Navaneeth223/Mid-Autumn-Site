@@ -13,13 +13,15 @@ import PetalLayer from './PetalLayer.jsx'
 // ---------------------------------------------------------------------------
 // 3 + 4 + 5. THE PINNED STAGE — the whole scroll journey lives here:
 //
-//   0.00–0.55  frame scrub: 121 Variant-B frames drawn 1:1 onto a <canvas>
-//              (drawImage, NOT <video>), tied to scroll via ScrollTrigger
-//   0.42–0.52  the "formation" caption fades through
-//   0.55–0.64  pop-out: 2D canvas crossfades -> Three.js mooncake positioned
-//              exactly where the flat cake sits in the last frame
-//   0.64–1.00  drift: zigzag path + wiggle + auto-rotate, easter eggs arm:
-//              rabbit hops in · moon becomes tappable · long-press overlay
+//   0.00–0.62  frame scrub: 121 Variant-B frames drawn 1:1 onto a <canvas>
+//              (drawImage, NOT <video>), tied to scroll via ScrollTrigger —
+//              stretched across most of the pin so the formation reads slow
+//   0.46–0.60  the "formation" caption fades through
+//   0.62–0.70  pop-out: 2D canvas crossfades -> Three.js mooncake positioned
+//              exactly where the flat cake sits in the last frame — the cake
+//              steps out of the image
+//   0.70–1.00  the cake swells to hero size and settles into its 3/4 pose;
+//              easter eggs arm: rabbit hops in · moon tappable · long-press
 //
 // All scroll-driven mutation happens on ONE plain object (stRef) with
 // transform/opacity writes only — no layout reads/writes per frame.
@@ -48,6 +50,7 @@ export default function ScrollStage({ assets, active }) {
   const stRef = useRef({ frame: 0, fade: 0, dx: 0, dy: 0, rotY: 0, zoom: 0 })
   const lastDrawn = useRef(-1)
   const flags = useRef({ rabbit: false, moonHint: false, pressHint: false, orbitHint: false })
+  const orbitTimer = useRef(0)
   const stageActive = useRef(false)
   const hotspotShown = useRef(false)
   const moonTapped = useRef(false)
@@ -181,7 +184,7 @@ export default function ScrollStage({ assets, active }) {
         // already overflow ~3.8x, so they get no boost).
         scale:
           (0.94 + 0.06 * st.fade) *
-          (1 + st.zoom * (viewSize.current.w > viewSize.current.h ? 0.1 : 0)),
+          (1 + st.zoom * (viewSize.current.w > viewSize.current.h ? 0.14 : 0)),
       })
       sceneRef.current.setActive(stageActive.current && st.fade > 0.01)
     }
@@ -221,6 +224,8 @@ export default function ScrollStage({ assets, active }) {
     // visitor's orbit/pan/zoom also resets so the pop-out stays pixel-exact
     if (st.fade < 0.1) {
       flags.current = { rabbit: false, moonHint: false, pressHint: false, orbitHint: false }
+      window.clearTimeout(orbitTimer.current)
+      orbitTimer.current = 0
       sceneRef.current?.resetView(true)
       for (const r of [moonHintRef, pressHintRef, orbitHintRef]) {
         if (r.current) {
@@ -607,9 +612,9 @@ export default function ScrollStage({ assets, active }) {
       captionRef.current,
       { autoAlpha: 0, y: 12 },
       { autoAlpha: 1, y: 0, duration: 0.05, ease: 'power2.out' },
-      0.42,
+      0.46,
     )
-    tl.to(captionRef.current, { autoAlpha: 0, duration: 0.04 }, 0.5)
+    tl.to(captionRef.current, { autoAlpha: 0, duration: 0.04 }, 0.56)
 
     // 3) pop-out crossfade (2D canvas -> WebGL cake)
     tl.to(st, { fade: 1, duration: TL.popEnd - TL.scrubEnd, onUpdate: apply }, TL.scrubEnd)
@@ -618,7 +623,9 @@ export default function ScrollStage({ assets, active }) {
     // into a 3/4 pose and PARKS — no more zigzag wander. The visitor takes
     // over from here: trackball rotate / move / zoom (armCakeViewer).
     tl.to(st, { zoom: 1, duration: 0.14, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd)
-    tl.to(st, { pitch: 0.3, duration: 0.32, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd + 0.02)
+    // (ends exactly at 1.00 so the timeline's total duration stays 1 and every
+    // TL fraction maps 1:1 onto the pinned scroll distance)
+    tl.to(st, { pitch: 0.3, duration: 0.28, ease: 'sine.inOut', onUpdate: apply }, TL.popEnd + 0.02)
 
     // 5) easter-egg arming (guarded one-shots; re-armed by applyScrollState)
     tl.call(() => {
@@ -639,12 +646,24 @@ export default function ScrollStage({ assets, active }) {
         showMoonHint()
       }
     }, null, TL.popEnd + 0.08)
+    // The orbit hint is a REAL-TIME nudge ("you can play with this"), not a
+    // scroll beat: ~6s after the cake parks. It must NOT live on the scrubbed
+    // timeline as a far-future position — a tl.call placed beyond the end
+    // stretches the timeline's total duration, and ScrollTrigger then maps the
+    // whole pin across that inflated duration (that bug once compressed the
+    // entire 121-frame formation into ~8% of the scroll = "way too fast").
     tl.call(() => {
       if (!flags.current.orbitHint) {
         flags.current.orbitHint = true
-        showOrbitHint()
+        window.clearTimeout(orbitTimer.current)
+        orbitTimer.current = window.setTimeout(() => {
+          orbitTimer.current = 0
+          if (stageActive.current && stRef.current.fade > 0.8 && flags.current.orbitHint) {
+            showOrbitHint()
+          }
+        }, 6100)
       }
-    }, null, TL.popEnd + 6.1)
+    }, null, TL.popEnd + 0.08)
 
     window.addEventListener('resize', onResize, { passive: true })
     return () => {
@@ -653,6 +672,7 @@ export default function ScrollStage({ assets, active }) {
       disposeLongPress()
       disposeViewer()
       disposeMoonTap()
+      window.clearTimeout(orbitTimer.current)
       petalRef.current?.setDrifting(false)
       if (tl) {
         tl.scrollTrigger?.kill()
